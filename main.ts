@@ -1,11 +1,29 @@
-controller.up.onEvent(ControllerButtonEvent.Pressed, function () {
+namespace SpriteKind {
+    export const cursor = SpriteKind.create()
+    export const button = SpriteKind.create()
+}
+scene.onOverlapTile(SpriteKind.Player, assets.tile`water`, function (sprite, location) {
+    game.gameOver(false)
+})
+controller.A.onEvent(ControllerButtonEvent.Pressed, function () {
     let mySprite: Sprite = null
     if (mySprite.vy == 0) {
         mySprite.vy = -160
     }
 })
-scene.onOverlapTile(SpriteKind.Player, assets.tile`water`, function (sprite, location) {
-    game.gameOver(false)
+sprites.onOverlap(SpriteKind.cursor, SpriteKind.button, function (sprite, otherSprite) {
+    if (otherSprite == level1 && controller.B.isPressed()) {
+        level = 1
+        Level_Control()
+    }
+    if (otherSprite == level2 && controller.B.isPressed()) {
+        play = 2
+        Level_Control()
+    }
+    if (otherSprite == level3 && controller.B.isPressed()) {
+        play = 3
+        Level_Control()
+    }
 })
 scene.onOverlapTile(SpriteKind.Player, assets.tile`barn`, function (sprite, location) {
     game.gameOver(true)
@@ -135,6 +153,60 @@ function Level_Control () {
             7777777777777777777777777777777777777777777777777777777777777777777777777777777777777777777777777777777777777777777777777777777777777777777777777777777777777777
             7777777777777777777777777777777777777777777777777777777777777777777777777777777777777777777777777777777777777777777777777777777777777777777777777777777777777777
             `)
+        mySprite2 = sprites.create(img`
+            1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 
+            1 f f f f f f f f f f f f f f 1 
+            1 f f f f f 8 8 8 f f f f f f 1 
+            1 f f f f 8 8 8 8 f f f f f f 1 
+            1 f f f 8 8 f 8 8 f f f f f f 1 
+            1 f f f f f f 8 8 f f f f f f 1 
+            1 f f f f f f 8 8 f f f f f f 1 
+            1 f f f f f f 8 8 f f f f f f 1 
+            1 f f f f f f 8 8 f f f f f f 1 
+            1 f f f f f f 8 8 f f f f f f 1 
+            1 f f f f f f 8 8 f f f f f f 1 
+            1 f f f 8 8 8 8 8 8 8 8 f f f 1 
+            1 f f f 8 8 8 8 8 8 8 8 f f f 1 
+            1 f f f f f f f f f f f f f f 1 
+            1 f f f f f f f f f f f f f f 1 
+            1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 
+            `, SpriteKind.Player)
+        mySprite3 = sprites.create(img`
+            1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 
+            1 f f f f f f f f f f f f f f 1 
+            1 f f f 8 8 8 8 8 8 8 f f f f 1 
+            1 f f f 8 8 8 8 8 8 8 f f f f 1 
+            1 f f f 8 8 f f f 8 8 f f f f 1 
+            1 f f f 8 8 f f f 8 8 f f f f 1 
+            1 f f f f f f f 8 8 8 f f f f 1 
+            1 f f f f f f 8 8 8 8 f f f f 1 
+            1 f f f f f 8 8 8 8 f f f f f 1 
+            1 f f f f 8 8 8 8 f f f f f f 1 
+            1 f f f 8 8 8 8 f f f f f f f 1 
+            1 f f f 8 8 8 8 8 8 8 8 f f f 1 
+            1 f f f 8 8 8 8 8 8 8 8 f f f 1 
+            1 f f f f f f f f f f f f f f 1 
+            1 f f f f f f f f f f f f f f 1 
+            1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 
+            `, SpriteKind.Player)
+        mySprite4 = sprites.create(img`
+            1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 
+            1 f f f f f f f f f f f f f f 1 
+            1 f f f f 8 8 8 8 8 8 f f f f 1 
+            1 f f f 8 8 8 8 8 8 8 8 f f f 1 
+            1 f f f f f f f f f 8 8 f f f 1 
+            1 f f f f f f f f 8 8 f f f f 1 
+            1 f f f f f f f 8 8 f f f f f 1 
+            1 f f f f f f 8 8 8 f f f f f 1 
+            1 f f f f 8 8 8 8 8 8 f f f f 1 
+            1 f f f f 8 8 8 8 8 8 8 f f f 1 
+            1 f f f f f f f f f 8 8 f f f 1 
+            1 f f f f f f f f f 8 8 f f f 1 
+            1 f f f 8 8 8 8 8 8 8 8 f f f 1 
+            1 f f f f 8 8 8 8 8 8 f f f f 1 
+            1 f f f f f f f f f f f f f f 1 
+            1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 
+            `, SpriteKind.Player)
         cursor = sprites.create(img`
             ..............................
             ..............................
@@ -167,33 +239,23 @@ function Level_Control () {
             ..............................
             ..............................
             `, SpriteKind.Player)
-        play = sprites.create(img`
-            ffffffffffffffffffffffffffffff
-            f8888888888888888888888888888f
-            f88fffff8f888888fffff8ff88ff8f
-            f88ff88f8f888888f888f8ff88ff8f
-            f88ff88f8f888888f888f8ff88ff8f
-            f88ff88f8f888888f888f8ff88ff8f
-            f88fffff8f888888fffff8ffffff8f
-            f88ff8888f888888fffff888ff888f
-            f88ff8888f888888f888f888ff888f
-            f88ff8888f888888f888f888ff888f
-            f88ff8888f888888f888f888ff888f
-            f88ff8888f888888f888f888ff888f
-            f88ff8888ffffff8f888f888ff888f
-            f88ff8888ffffff8f888f888ff888f
-            f8888888888888888888888888888f
-            ffffffffffffffffffffffffffffff
-            `, SpriteKind.Player)
-        play.setPosition(76, 85)
         controller.moveSprite(cursor)
+        level1.setPosition(22, 69)
+        level2.setPosition(77, 69)
+        level3.setPosition(128, 69)
     }
 }
 sprites.onOverlap(SpriteKind.Player, SpriteKind.Enemy, function (sprite, otherSprite) {
 	
 })
-let play: Sprite = null
 let cursor: Sprite = null
+let mySprite4: Sprite = null
+let mySprite3: Sprite = null
+let mySprite2: Sprite = null
+let level3: Sprite = null
+let play = 0
+let level2: Sprite = null
+let level1: Sprite = null
 let level = 0
 level = 0
 Level_Control()
